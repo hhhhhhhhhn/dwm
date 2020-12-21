@@ -8,8 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#002b36";
-static const char col_gray2[]       = "#002b36";
+static const char col_gray1[]       = "#00151a";
+static const char col_gray2[]       = "#00151a";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#268bd2";
@@ -46,11 +46,6 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -61,15 +56,32 @@ static const Layout layouts[] = {
 static const char *termcmd[]  = { "urxvt", NULL };
 
 
-int currentlayout = 0;
+int currentlayout[10] = {0,0,0,0,0,0,0,0,0,0};
+int currenttag = 0;
 
 void swaplayouts() {
-	if(currentlayout)
-		setlayout(&(Arg){.v = &layouts[0]});
-	else
-		setlayout(&(Arg){.v = &layouts[1]});
-	currentlayout = !currentlayout;
+	currentlayout[currenttag] = !currentlayout[currenttag];
+	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
 }
+
+void settag(Arg* arg) {
+	view(&(Arg){.ui = 1 << arg->i});
+	currenttag = arg->i;
+	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
+}
+
+void setalltags() {
+	view(&(Arg){.ui = ~0});
+	currenttag = 9;
+	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
+}
+
+#define TAGKEYS(KEY,TAG) \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY,                       KEY,      settag,         {.i = TAG} },
+	/*{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
 #include "movestack.c"
 
@@ -96,7 +108,8 @@ static Key keys[] = {
 //	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 //	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
 	{ MODKEY|ControlMask,           XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+//	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+	{ MODKEY,                       XK_0,      setalltags,     {0} },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
