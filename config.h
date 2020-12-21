@@ -60,6 +60,17 @@ static const Layout layouts[] = {
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 
+
+int currentlayout = 0;
+
+void swaplayouts() {
+	if(currentlayout)
+		setlayout(&(Arg){.v = &layouts[0]});
+	else
+		setlayout(&(Arg){.v = &layouts[1]});
+	currentlayout = !currentlayout;
+}
+
 #include "movestack.c"
 
 static Key keys[] = {
@@ -79,10 +90,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_j,      setmfact,       {.f = -0.05} },
 	{ MODKEY|ControlMask,           XK_k,      setmfact,       {.f = +0.05} },
-//	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY,                       XK_Tab,    swaplayouts,    {0} },
 	{ MODKEY,                       XK_x,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+//	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+//	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 //	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
 	{ MODKEY|ControlMask,           XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
