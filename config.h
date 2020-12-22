@@ -57,7 +57,16 @@ static const char *termcmd[]  = { "urxvt", NULL };
 
 
 int currentlayout[10] = {0,0,0,0,0,0,0,0,0,0};
+float currentmfactor[10] = {0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55};
 int currenttag = 0;
+
+void changemfactor(Arg* arg) {
+	float f = currentmfactor[currenttag] + arg->f;
+	if(f < 0.1 || f > 0.9)
+		return;
+	currentmfactor[currenttag] = f;
+	setmfact(&(Arg){.f = 1.0 + f});
+}
 
 void swaplayouts() {
 	currentlayout[currenttag] = !currentlayout[currenttag];
@@ -68,6 +77,7 @@ void settag(Arg* arg) {
 	view(&(Arg){.ui = 1 << arg->i});
 	currenttag = arg->i;
 	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
+	setmfact(&(Arg){.f = 1.0 + currentmfactor[currenttag]});
 }
 
 void setalltags() {
@@ -100,8 +110,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_j,      setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_k,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ControlMask,           XK_j,      changemfactor,  {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_k,      changemfactor,  {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,    swaplayouts,    {0} },
 	{ MODKEY,                       XK_x,      killclient,     {0} },
 //	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
