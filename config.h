@@ -29,7 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvt",        0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvtc",        0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -53,7 +53,7 @@ static const Layout layouts[] = {
 /* commands */
 // static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+static const char *termcmd[]  = { "urxvtc", NULL };
 
 
 int currentlayout[10] = {0,0,0,0,0,0,0,0,0,0};
