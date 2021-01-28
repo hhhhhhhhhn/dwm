@@ -30,6 +30,7 @@ static const Rule rules[] = {
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "urxvtc",        0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvt",        0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -53,7 +54,7 @@ static const Layout layouts[] = {
 /* commands */
 // static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "urxvtc", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 
 
 int currentlayout[10] = {0,0,0,0,0,0,0,0,0,0};
@@ -110,8 +111,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_j,      changemfactor,  {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_k,      changemfactor,  {.f = +0.05} },
+	{ MODKEY,                       XK_h,      changemfactor,  {.f = -0.05} },
+	{ MODKEY,                       XK_l,      changemfactor,  {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,    swaplayouts,    {0} },
 	{ MODKEY,                       XK_x,      killclient,     {0} },
 //	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
