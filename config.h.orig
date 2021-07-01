@@ -27,11 +27,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title      tags mask  isfloating  iscentered  isterminal  noswallow  monitor */
-	{ "St",      NULL,     NULL,      0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvtc",  0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvt",   0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "float",   0,         1,          1,          1,           0,        -1 },
+	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvtc",       0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvt",        0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "float",        0,         1,          1,           0,        -1 },
+	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -52,7 +53,7 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-#define TERMCMD(cmd) { .v = (const char*[]){ TERM, "-title", "float", "-e", "sh", "-c", cmd, NULL } }
+#define TERMCMD(cmd) { .v = (const char*[]){ TERM, "-title", "float","-e", "sh", "-c", cmd, NULL } }
 
 /* commands */
 // static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
