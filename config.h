@@ -102,9 +102,11 @@ void setalltags() {
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD("terminxwd") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD("brave") },
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
+	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
 //	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_m,      focusmaster,    {0} },
 	{ MODKEY,                       XK_space,  focusstack,     {.i = +1 } },
