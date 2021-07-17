@@ -103,7 +103,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD("terminxwd") },
-	{ MODKEY,                       XK_c,      spawn,          SHCMD("brave") },
+	{ MODKEY,                       XK_b,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
 	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
