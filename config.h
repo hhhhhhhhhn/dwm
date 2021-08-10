@@ -104,6 +104,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD("terminxwd") },
 	{ MODKEY,                       XK_b,      spawn,          SHCMD("$BROWSER") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("screengrab") },
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
 	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
