@@ -109,6 +109,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
 	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
+	{ MODKEY,                       XK_c,      spawn,          TERMCMD("cht") },
 //	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_m,      focusmaster,    {0} },
 	{ MODKEY,                       XK_space,  focusstack,     {.i = +1 } },
