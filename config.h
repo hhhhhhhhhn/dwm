@@ -78,10 +78,10 @@ void swaplayouts() {
 }
 
 void settag(Arg* arg) {
-	view(&(Arg){.ui = 1 << arg->i});
 	currenttag = arg->i;
 	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
 	setmfact(&(Arg){.f = 1.0 + currentmfactor[currenttag]});
+	view(&(Arg){.ui = 1 << arg->i});
 }
 
 void setalltags() {
