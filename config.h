@@ -27,11 +27,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title      tags mask  isfloating  iscentered  isterminal  noswallow  monitor */
-	{ "St",      NULL,     NULL,      0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvtc",  0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvt",   0,         0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "float",   0,         1,          1,          1,           0,        -1 },
+	/* class     instance  title      tags mask  isfloating  iscentered  outofstack  isterminal  noswallow  monitor */
+	{ "St",      NULL,     NULL,      0,         0,          0,          0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvtc",  0,         0,          0,          0,          1,           0,        -1 },
+	{ NULL,      NULL,     "urxvt",   0,         0,          0,          0,          1,           0,        -1 },
+	{ NULL,      NULL,     "float",   0,         1,          1,          0,          1,           0,        -1 },
+	{ NULL,      NULL,     "overlay", 0,         1,          0,          1,          1,           0,        -1 },
 };
 
 /* layout(s) */
