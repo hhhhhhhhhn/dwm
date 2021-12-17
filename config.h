@@ -60,41 +60,10 @@ static const Layout layouts[] = {
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { TERM, NULL };
 
-
-int currentlayout[10] = {0,0,0,0,0,0,0,0,0,0};
-float currentmfactor[10] = {0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55,0.55};
-int currenttag = 0;
-
-void changemfactor(Arg* arg) {
-	float f = currentmfactor[currenttag] + arg->f;
-	if(f < 0.1 || f > 0.9)
-		return;
-	currentmfactor[currenttag] = f;
-	setmfact(&(Arg){.f = 1.0 + f});
-}
-
-void swaplayouts() {
-	currentlayout[currenttag] = !currentlayout[currenttag];
-	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
-}
-
-void settag(Arg* arg) {
-	currenttag = arg->i;
-	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
-	setmfact(&(Arg){.f = 1.0 + currentmfactor[currenttag]});
-	view(&(Arg){.ui = 1 << arg->i});
-}
-
-void setalltags() {
-	view(&(Arg){.ui = ~0});
-	currenttag = 9;
-	setlayout(&(Arg){.v = &layouts[currentlayout[currenttag]]});
-}
-
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY,                       KEY,      settag,         {.i = TAG} },
-	/*{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} },
+	/*{ MODKEY|ControlMask,           KEY,    toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
@@ -122,16 +91,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      changemfactor,  {.f = -0.05} },
-	{ MODKEY,                       XK_l,      changemfactor,  {.f = +0.05} },
-	{ MODKEY,                       XK_Tab,    swaplayouts,    {0} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_Tab,    swaplayout,     {0} },
 	{ MODKEY,                       XK_x,      killclient,     {0} },
 //	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 //	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 //	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
 	{ MODKEY|ControlMask,           XK_space,  togglefloating, {0} },
 //	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY,                       XK_0,      setalltags,     {0} },
+	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
