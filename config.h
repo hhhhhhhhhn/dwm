@@ -29,8 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title      tags mask  isfloating  iscentered  outofstack  isterminal  noswallow  monitor */
 	{ "St",      NULL,     NULL,      0,         0,          0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvtc",  0,         0,          0,          0,          1,           0,        -1 },
-	{ NULL,      NULL,     "urxvt",   0,         0,          0,          0,          1,           0,        -1 },
+	{ NULL,      NULL,     "st",      0,         0,          0,          0,          1,           0,        -1 },
 	{ NULL,      NULL,     "float",   0,         1,          1,          0,          1,           0,        -1 },
 	{ NULL,      NULL,     "overlay", 0,         1,          0,          1,          1,           0,        -1 },
 };
@@ -48,7 +47,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
-#define TERM "urxvt"
+#define TERM "st"
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
