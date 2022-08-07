@@ -242,6 +242,7 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
+static void spawn_shell(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
@@ -1581,7 +1582,7 @@ run(void)
 						event_fd, events[i].data.ptr, events[i].data.u32,
 						events[i].data.u64);
 				fprintf(stderr, " with events %d\n", events[i].events);
-				return;
+				// return; // TODO: Find out why
 			}
 		}
 	}
@@ -1906,6 +1907,13 @@ spawn(const Arg *arg)
 		perror(" failed");
 		exit(EXIT_SUCCESS);
 	}
+}
+
+void
+spawn_shell(const Arg *arg)
+{
+	if (arg == NULL || arg->v == NULL) return;
+	spawn(&(Arg){ .v = (const char*[]) {"/bin/sh", "-c", arg->v, NULL}});
 }
 
 void
