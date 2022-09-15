@@ -77,6 +77,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_u,      spawn,          TERMCMD("utfchars") },
 	{ MODKEY,                       XK_e,      spawn,          TERMCMD("emojis") },
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
+	{ MODKEY,                       XK_g,      spawn,          TERMCMD("trans-sel") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
 	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
 	{ MODKEY,                       XK_c,      spawn,          TERMCMD("cht") },
