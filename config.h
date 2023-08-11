@@ -74,6 +74,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          SHCMD("terminxwd") },
 	{ MODKEY,                       XK_b,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("screenshot") },
+	{ MODKEY,                       XK_o,      spawn,          SHCMD("ssocr") },
 	{ MODKEY,                       XK_u,      spawn,          TERMCMD("utfchars") },
 	{ MODKEY,                       XK_e,      spawn,          TERMCMD("emojis") },
 	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
