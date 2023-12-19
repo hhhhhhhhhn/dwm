@@ -67,6 +67,7 @@ static const char *termcmd[]  = { TERM, NULL };
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
 #include "movestack.c"
+#include <X11/XF86keysym.h>
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -107,6 +108,15 @@ static Key keys[] = {
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+
+	// Media buttons
+	{ 0,                            XF86XK_AudioLowerVolume,  spawn, SHCMD("pulsemixer --change-volume -5") },
+	{ 0,                            XF86XK_AudioRaiseVolume,  spawn, SHCMD("pulsemixer --change-volume +5") },
+	{ 0,                            XF86XK_AudioMute,         spawn, SHCMD("pulsemixer --toggle-mute") },
+	{ 0,				            XF86XK_MonBrightnessUp,   spawn, SHCMD("light -A 8") },
+	{ 0,				            XF86XK_MonBrightnessDown, spawn, SHCMD("light -U 8") },
+
+
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
