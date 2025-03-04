@@ -52,6 +52,7 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+// Runs the command in a floating shell
 #define TERMCMD(cmd) { .v = (const char*[]){ TERM, "-T", "float", "-e", "sh", "-c", cmd, NULL } }
 
 /* commands */
@@ -76,13 +77,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("screenshot") },
 	{ MODKEY,                       XK_o,      spawn,          SHCMD("ssocr") },
+	{ MODKEY,                       XK_c,      spawn,          SHCMD("togglecompositor") },
 	{ MODKEY,                       XK_u,      spawn,          TERMCMD("utfchars") },
 	{ MODKEY,                       XK_e,      spawn,          TERMCMD("emojis") },
-	{ MODKEY,                       XK_t,      spawn,          TERMCMD("htop") },
+	{ MODKEY,                       XK_t,      spawn,          TERMCMD("$TOP") },
 	{ MODKEY,                       XK_g,      spawn,          TERMCMD("trans-sel") },
 	{ MODKEY,                       XK_a,      spawn,          TERMCMD("pulsemixer") },
 	{ MODKEY,                       XK_n,      spawn,          TERMCMD("nmtui") },
-	{ MODKEY,                       XK_c,      spawn,          TERMCMD("cht") },
 //	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_m,      focusmaster,    {0} },
 	{ MODKEY,                       XK_space,  focusstack,     {.i = +1 } },
